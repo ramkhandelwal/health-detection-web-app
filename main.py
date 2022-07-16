@@ -70,6 +70,73 @@ def breastcancer():
     else:
         return render_template('breastcancer.html')
 
+
+
+####
+# load covid model path
+COVID_MODEL_PATH = 'covid_model.h5'
+
+#Load your trained model
+model1 = load_model(COVID_MODEL_PATH)
+# covid detection
+import tensorflow as tf
+def covid_predict(img_path, model):
+    img = tf.keras.utils.load_img(img_path, target_size=(224,224))
+    image = tf.keras.preprocessing.image.img_to_array(img)
+    image = image / 255.0
+    image = image.reshape(1,224,224,3)
+    prediction = model1.predict(image)
+    return prediction
+
+# def predict_image(filename):
+    # img = load_img(filename, target_size=(224,224))
+    # image = keras.preprocessing.image.img_to_array(img)
+    # image = image / 255.0
+    # image = image.reshape(1,224,224,3)
+    # model = load_model('resnet_chest.h5')
+    # #model = tf.keras.models.load_model('resnet_chest.h5')
+    # prediction = model.predict(image)
+#     plt.imshow(img)
+#     #print(prediction)
+    # if(prediction[0][0]> 0.5):
+    #     stat = prediction[0][0]* 100 
+    #     print("This image is %.2f percent %s"% (stat, "COVID"))
+    # else:
+    #     stat = (prediction[0][1])* 100
+    #     print("This image is %.2f percent %s" % (stat, "NORMAL"))
+
+
+# Covid Post 
+# breast cancer section
+@app.route('/covid19',methods=['GET','POST'])
+def covid19():
+    if request.method == 'POST':
+        try:
+            # Get the file from post request
+            f = request.files['file']
+            # Save the file to ./uploads
+            basepath = os.path.dirname(__file__)
+            file_path = os.path.join(
+                basepath, '', secure_filename(f.filename))
+            f.save(file_path)
+            # Make prediction
+            preds = covid_predict(file_path, model1)
+            os.remove(file_path)#removes file from the server after prediction has been returned
+            if preds[0][0] > 0.5:
+                res = "Sorry :( you have got the chances of Covid"
+            else:
+                res = "Congratulations! you are safe from Covid"
+            return render_template('Covid.html',prediction=res)
+        except Exception as e:
+            print(e)
+            error=("Have you uploaded the image??🤔🤔")
+            error={"error":error}
+            return render_template("404.html",error=error)
+    return render_template('Covid.html')
+
+
+
+
 # Diabetes section
 @app.route('/diabetes',methods=['GET','POST'])
 def diabetes():
