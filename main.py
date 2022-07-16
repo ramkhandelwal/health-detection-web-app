@@ -106,8 +106,7 @@ def covid_predict(img_path, model):
     #     print("This image is %.2f percent %s" % (stat, "NORMAL"))
 
 
-# Covid Post 
-# breast cancer section
+#Covid section
 @app.route('/covid19',methods=['GET','POST'])
 def covid19():
     if request.method == 'POST':
@@ -133,6 +132,54 @@ def covid19():
             error={"error":error}
             return render_template("404.html",error=error)
     return render_template('Covid.html')
+
+
+
+####
+# load Tuberculosis model path
+TB_MODEL_PATH = 'tb_model.h5'
+
+#Load your trained model
+model_tb = load_model(TB_MODEL_PATH)
+
+import cv2
+def tb_predict(img_path, model):
+    img = tf.keras.utils.load_img(img_path, target_size=(224,224))
+    image = tf.keras.preprocessing.image.img_to_array(img)
+    image = image / 255.0
+    image = image.reshape(1,224,224,3)
+    prediction = model_tb.predict(image)
+    result=np.argmax(prediction,axis=1)
+    classes=['Negative','Positive']
+    predicted=classes[result[0]]
+    return predicted
+
+#Covid section
+@app.route('/tb',methods=['GET','POST'])
+def tb():
+    if request.method == 'POST':
+        try:
+            # Get the file from post request
+            f = request.files['file']
+            # Save the file to ./uploads
+            basepath = os.path.dirname(__file__)
+            file_path = os.path.join(
+                basepath, '', secure_filename(f.filename))
+            f.save(file_path)
+            # Make prediction
+            preds = tb_predict(file_path, model_tb)
+            os.remove(file_path)#removes file from the server after prediction has been returned
+            if preds == 'Positive':
+                res = "Sorry :( you have got the chances of Tuberculosis"
+            else:
+                res = "Congratulations! you are safe from Tuberculosis"
+            return render_template('Tuberculosis.html',prediction=res)
+        except Exception as e:
+            print(e)
+            error=("Have you uploaded the image??🤔🤔")
+            error={"error":error}
+            return render_template("404.html",error=error)
+    return render_template('Tuberculosis.html')
 
 
 
