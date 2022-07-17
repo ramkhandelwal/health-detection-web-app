@@ -16,13 +16,13 @@ The main objective of OHD is to help people predict the disease in case of absen
 - Breast Cancer Prediction
 - Diabetes Prediction
 - Thyroid Prediction
-- Brain Tumor prediction
+- Covid-19 prediction
 - Pneumonia Prediction
-- Malaria Prediction
+- Tuberculosis Prediction
 
 ### Why Onsite Health Diagnostic (OHD)
 
-<p>The main objective of OHD is to aid individuals, medical professionals or any learners to help diagnose disease based on the data. For example , if you want to diagnose a brain tumor , you only need to upload the IR image of your brain. If you want to know if you have suffered from heart disease, you only need to input some data such as BMI, Age, Cholesterol, RestingECG etc. The Machine Learning model integrated with websites helps predict whether you have got a certain disease or not.</p>
+<p>The main objective of HAD is to aid individuals, medical professionals or any learners to help diagnose disease based on the data. For example , if you want to diagnose a Covid-19 , you only need to upload the X-ray images of your chest. If you want to know if you have suffered from heart disease, you only need to input some data such as BMI, Age, Cholesterol, RestingECG etc. The Machine Learning model integrated with websites helps predict whether you have got a certain disease or not.</p>
 
 ### Licence
 
