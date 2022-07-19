@@ -291,9 +291,9 @@ PNEUMONIA_MODEL_PATH = 'pneumonia_model.h5'
 model = load_model(PNEUMONIA_MODEL_PATH)
 # pneumonia detection
 def pneumonia_predict(img_path, model):
-    img = image.load_img(img_path, target_size=(64, 64)) #target_size must agree with what the trained model expects!!
+    img = tf.keras.utils.load_img(img_path, target_size=(64, 64)) #target_size must agree with what the trained model expects!!
     # Preprocessing the image
-    img = image.img_to_array(img)
+    img = tf.keras.utils.img_to_array(img)
     img = np.expand_dims(img, axis=0)
     preds = model.predict(img)
     return preds
