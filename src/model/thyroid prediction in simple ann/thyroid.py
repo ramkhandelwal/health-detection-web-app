@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jan 15 18:50:52 2022
-
-@author: Rohan
-"""
-
-
 from keras.models import Sequential
 from tensorflow.keras.layers import Dense,Dropout
 from tensorflow.keras.optimizers import Adam

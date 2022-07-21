@@ -1,6 +1,3 @@
-'''Nishant Banjade'''
-'''Heart Failure prediction model '''
-'''Refer jupyter notebook for EDA'''
 # import the libraries
 import numpy as np
 import pandas as pd

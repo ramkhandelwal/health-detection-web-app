@@ -139,7 +139,6 @@ top-section
     background-color:rgb(10, 41, 40)!important;
 }
 #top-section{
-	/* background: url('/home/apsara/Desktop/project1../bg.jpg') no-repeat fixed; */
 	background-size: cover;
 	min-height: 650px;
 	position: relative;

@@ -1,6 +1,3 @@
-'''Nishant Banjade'''
-'''Heart Failure prediction
-'''
 # import the libraries
 import pandas as pd
 import numpy as np

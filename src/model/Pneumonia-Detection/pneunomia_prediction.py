@@ -1,8 +1,3 @@
-'''@Aurthor: Nishant Banjade'''
-
-'''Pneunomia Machine Learning model
-Note: For complete EDA and Visualization, model evaluation : Refer to Pneunomia detection jupyter notebook'''
-
 # load the packages
 import os
 import pandas as pd
